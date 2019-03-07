@@ -14,7 +14,25 @@ class ExcelPlayTime:
         data_frame.loc["Row1"] = self.sample_data_row1
         data_frame.loc["Row2"] = self.sample_data_row2
         data_frame.loc["Row3"] = self.sample_data_row3
-        data_frame.to_csv("write_file.csv")
+
+        # Set some styles
+        data_frame = data_frame.style.applymap(apply_formatting)
+
+        data_frame.to_excel("write_file.xlsx", sheet_name='Sheet1')
+
+
+def apply_formatting(val):
+    if val == "Data11":
+        return 'color: red'
+    if val == "Data22":
+        return 'color: green'
+    if val == "Data33":
+        return 'color: blue'
+    if val == "Data35":
+        return 'background-color: yellow'
+    if val == "Data15":
+        return 'font-size: 150%'
+    return 'color: black'
 
 
 excel_play_time = ExcelPlayTime()
